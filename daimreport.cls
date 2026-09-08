@@ -49,15 +49,29 @@
 %    The side margin is exposed as a length because the first-page imprint
 %    block is positioned absolutely and must agree with it.
 % ---------------------------------------------------------------------------
-\newlength{\daimsidemargin}    \setlength{\daimsidemargin}{24mm}
-\newlength{\daimimprintraise}  \setlength{\daimimprintraise}{15mm}
-\newlength{\daimimprintreserve}\setlength{\daimimprintreserve}{19mm}
+% Measured off the DeepMind reports: A4 with a 166 mm measure, the running-head
+% rule 23 mm below the trim and the folio rule 23.5 mm above it.
+\newlength{\daimsidemargin}    \setlength{\daimsidemargin}{22mm}
+\newlength{\daimtopmargin}     \setlength{\daimtopmargin}{29mm}
+\newlength{\daimbotmargin}     \setlength{\daimbotmargin}{28mm}
+
+% Page 1 only. The masthead is lifted out of the top margin so the logo sits
+% near the trim as it does on their title page, rather than following the body
+% text block down. The lift is tuned so the rule under the logo lands about
+% 31 mm from the trim: our logo is a two-mark lockup, far taller than the
+% DeepMind wordmark, so it cannot sit as high as their 23 mm rule without
+% crowding the page edge. \daimimprintraise puts the page-1 imprint rule level
+% with the folio rule on the body pages.
+\newlength{\daimmastheadlift}  \setlength{\daimmastheadlift}{16mm}
+\newlength{\daimimprintraise}  \setlength{\daimimprintraise}{12.6mm}
+\newlength{\daimimprintreserve}\setlength{\daimimprintreserve}{4mm}
 
 \RequirePackage{geometry}
 \geometry{%
   a4paper,
-  left=\daimsidemargin, right=\daimsidemargin, top=17mm, bottom=22mm,
-  headheight=13pt, headsep=6mm, footskip=11mm}
+  left=\daimsidemargin, right=\daimsidemargin,
+  top=\daimtopmargin, bottom=\daimbotmargin,
+  headheight=13pt, headsep=6mm, footskip=8.5mm}
 
 \RequirePackage{eso-pic}
 
@@ -245,6 +259,8 @@
   \hypersetup{pdftitle={\DAIMTitle},pdfauthor={\DAIMAuthor},
               pdfsubject={\DAIMSeries\space--\space\DAIMReportNumber}}%
   % --- masthead: logo left, report number and date right ------------------
+  % Lift it out of the top margin; see \daimmastheadtop above.
+  \vspace*{-\daimmastheadlift}%
   \noindent
   \begin{minipage}[b]{0.60\textwidth}
     \ifdaim@logo
