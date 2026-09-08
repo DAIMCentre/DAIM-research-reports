@@ -1,0 +1,244 @@
+% ===========================================================================
+%  DAIM Research Report Series -- report template
+%
+%  1. Fill in the metadata block below.
+%  2. Replace the placeholder text in each section.
+%  3. Build with:  latexmk -pdf main.tex
+%
+%  Add [anonymous] to hide the author block for blind review, or [nologo] to
+%  drop the masthead logo:  \documentclass[anonymous]{daimreport}
+% ===========================================================================
+\documentclass{daimreport}
+
+% ---------------------------------------------------------------------------
+%  Metadata -- everything the title page, running head and imprint need
+% ---------------------------------------------------------------------------
+\reporttitle{Report Title in Sentence Case}
+\reportsubtitle{An optional subtitle giving the scope or the claim}
+\shorttitle{Short Title for the Running Head}
+
+% Use \daimmark{...} for the superscript markers, and explain them in
+% \reportauthornote. Separate authors with commas.
+\reportauthor{First A. Author\daimmark{*}, Second B. Author,
+              Third C. Author\daimmark{\dag}}
+
+\reportaffiliation{Centre of Excellence for Data Science, Artificial Intelligence
+                   and Modelling (DAIM), University of Hull, United Kingdom}
+
+\reportauthornote{\daimmark{*}Corresponding author.
+                  \daimmark{\dag}Also at Department Name, Institution Name.}
+
+\reportemail{first.author@hull.ac.uk}
+\reportnumber{DAIM-RR-2026-000}
+
+% Optional overrides -- leave commented out to accept the defaults.
+%
+% The masthead date is the compile date automatically, so it tracks whoever
+% rebuilds the file. Uncomment \reportdate to pin it once the report is issued.
+% \reportdate{16 March 2026}
+% \reportseries{DAIM Research Report Series}
+% \reportrights{\textcopyright\ 2026 University of Hull. All rights reserved.}
+% \reportlogowidth{50mm}
+\reportlogo{assets/DAIM_UoH_Logo.png}
+
+\begin{document}
+
+\makedaimtitle
+
+% ---------------------------------------------------------------------------
+%  Abstract -- one paragraph, no heading, set bold across the full measure.
+%  Aim for 150-250 words: what the problem is, what you did, what you found.
+% ---------------------------------------------------------------------------
+\begin{daimabstract}
+State the problem in one or two sentences, then say what this report
+contributes. Summarise the approach without method detail, give the headline
+result with a number if you have one, and close with what follows from it. The
+abstract carries no heading and is set in bold across the full measure, so keep
+it to a single paragraph. Readers who go no further should still come away
+knowing what was done and what it means.
+\end{daimabstract}
+
+% Optional; delete if the series does not use keywords.
+\daimkeywords{first keyword; second keyword; third keyword; fourth keyword}
+
+% ---------------------------------------------------------------------------
+%  Contents -- OFF by default, which is the convention this layout follows: a
+%  published paper carries no printed contents list and navigates by the PDF
+%  bookmarks, which are generated either way.
+%
+%  Uncomment the line below only for a long report (roughly fifteen pages up).
+%  It is set the way a paper would set it -- no dotted leaders, tight leading,
+%  page numbers flush right -- not the way a thesis would.
+% ---------------------------------------------------------------------------
+% \daimcontents
+
+\section{Introduction}
+
+Open with the problem and why it matters, in prose rather than bullets. Cite as
+you go: parenthetically with \citep{placeholder-article}, or in the running text
+as \citet{placeholder-book} showed. Multiple sources go in one call,
+\citep{placeholder-article,placeholder-inproceedings}, so that they collapse
+into a single parenthesis.
+
+Paragraphs are indented and carry no extra vertical space between them, which is
+the convention this layout follows. Use a footnote for an aside that would
+otherwise interrupt the argument.\footnote{Footnotes are set small below a short
+rule. Keep them rare; anything load-bearing belongs in the body or an appendix.}
+
+State the contribution explicitly. A short list is appropriate here even though
+the surrounding text is prose:
+
+\begin{enumerate}
+  \item \textbf{First contribution.} One sentence saying what is new and what it
+        enables.
+  \item \textbf{Second contribution.} Another sentence in the same shape.
+  \item \textbf{Third contribution.} And a third, if there is one.
+\end{enumerate}
+
+Use a key box sparingly --- once or twice in a report --- for the claim you most
+want a skimming reader to take away.
+
+\begin{daimkeybox}{Headline finding}
+State the single most important result or position here, in two or three
+sentences. This panel is deliberately conspicuous, so it loses its force if it
+appears on every page.
+\end{daimkeybox}
+
+\subsection{Scope}
+
+Say what the report does and does not cover, and how it relates to adjacent
+work. Second-level headings are numbered and unpunctuated.
+
+\subsubsection{A third level, if the material needs it}
+
+Three levels are available. If you find yourself wanting a fourth, use a run-in
+paragraph heading instead.
+
+\paragraph{Run-in heading} A bold run-in heading followed by a full stop, then
+the text on the same line. Good for naming a method, an assumption or a case
+without spending a numbered heading on it.
+
+\section{Method}
+
+Describe the approach in enough detail to be reproducible. Display mathematics
+is numbered and referenced by number, so that the text can point at it:
+\begin{equation}
+  y = f(x; \theta) + \varepsilon,
+  \qquad \varepsilon \sim \mathcal{N}(0, \sigma^2),
+  \label{eq:model}
+\end{equation}
+where $x$ is the input, $\theta$ the parameters and $\varepsilon$ the residual.
+Refer back with Equation~\eqref{eq:model} rather than repeating it.
+
+Figures are centred, with the caption below and labelled for cross-reference.
+Replace the placeholder box below with \verb|\includegraphics| or a TikZ
+picture; Figure~\ref{fig:placeholder} shows where it goes.
+
+\begin{figure}[t]
+\centering
+% Replace this placeholder with your artwork, e.g.
+%   \includegraphics[width=0.8\textwidth]{assets/your-figure.pdf}
+\fcolorbox{DAIMRule}{DAIMAccentTint}{%
+  \parbox[c][36mm][c]{0.78\textwidth}{\centering\color{DAIMMuted}\small
+    Figure artwork goes here\\[3pt]
+    \texttt{\textbackslash includegraphics[width=0.8\textbackslash textwidth]\{file\}}}}
+\caption{A one- or two-sentence caption that says what the reader should see,
+not merely what the axes are. The label and text are separated by a vertical
+bar, and the whole caption is centred.}
+\label{fig:placeholder}
+\end{figure}
+
+\section{Results}
+
+Tables use \texttt{booktabs} rules with a tinted header row. Keep them free of
+vertical rules, and put the caption below the table.
+
+\begin{table}[t]
+\centering
+\begin{tabularx}{\textwidth}{L{28mm} R{22mm} R{22mm} Y}
+\toprule
+\daimheadrow \daimth{Condition} & \daimth{Metric A} & \daimth{Metric B} & \daimth{Notes} \\
+\midrule
+Baseline        & 0.00 & 0.00 & Reference condition. \\
+Variant one     & 0.00 & 0.00 & One clause on what changed. \\
+Variant two     & 0.00 & 0.00 & One clause on what changed. \\
+\textbf{Ours}   & \textbf{0.00} & \textbf{0.00} & Bold the row you want read first. \\
+\bottomrule
+\end{tabularx}
+\caption{Caption below the table, saying what the comparison establishes.
+Define every abbreviation used in the header.}
+\label{tab:placeholder}
+\end{table}
+
+Refer to floats by number --- Table~\ref{tab:placeholder} and
+Figure~\ref{fig:placeholder} --- never as ``the table above'', since floats
+move.
+
+Use the neutral grey panel for verbatim material: a transcript, a prompt, a
+worked example, a piece of a specification.
+
+% Short panels read better kept whole; drop [breakable=false] for long ones.
+\begin{daimbox}[breakable=false]{Example transcript}
+\textbf{Input:} The prompt, query or input case, quoted verbatim.
+
+\textbf{Output:} The response or result, quoted verbatim and truncated with an
+ellipsis if it runs long.
+
+\textit{A short italic gloss on what the example demonstrates.}
+\end{daimbox}
+
+\section{Discussion}
+
+Interpret the results: what they support, what they do not, and where the
+approach breaks down. Be specific about limitations --- a reader who finds them
+for you will trust the rest less. Reports and preprints cite the same way as
+anything else \citep{placeholder-report}.
+
+\section{Conclusion}
+
+Restate the contribution in a sentence, then say what should happen next. Avoid
+introducing new claims here.
+
+% ---------------------------------------------------------------------------
+%  Back matter
+% ---------------------------------------------------------------------------
+\daimsection{Acknowledgements}
+
+Funding, facilities and people who helped but are not authors. Name the grant
+and its number if there is one. Use \verb|\daimsection| for headings that
+should appear in the contents but carry no number.
+
+\daimbibliography{references}
+
+% ---------------------------------------------------------------------------
+%  Appendices -- sections become "Appendix A.", floats renumber to A1, A2, ...
+%  Delete everything below if the report has no appendices.
+% ---------------------------------------------------------------------------
+\daimappendix
+
+\section{Notation}
+
+Material that supports the argument but would interrupt it: notation,
+derivations, full parameter tables, extra results.
+
+\begin{table}[h]
+\centering
+\begin{tabularx}{0.75\textwidth}{L{22mm} Y}
+\toprule
+\daimheadrow \daimth{Symbol} & \daimth{Meaning} \\
+\midrule
+$x$        & Input variable \\
+$y$        & Observed response \\
+$\theta$   & Model parameters \\
+$\varepsilon$ & Residual term \\
+\bottomrule
+\end{tabularx}
+\caption{Notation used throughout the report.}
+\label{tab:notation}
+\end{table}
+
+\section{Additional results}
+
+A second appendix, if you need one.
+
+\end{document}
